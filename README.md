@@ -26,9 +26,9 @@ $ sudo apt-get update & sudo apt-get install jq
 
 ## Run Tests
 
-$ cp categories.json ./test_result
-
 $ pytest --alluredir=./test_result
+
+$ cp categories.json ./test_result
 
 $ allure serve ./test_result (run locally)
 
