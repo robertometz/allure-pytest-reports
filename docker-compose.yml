@@ -1,0 +1,27 @@
+version: '3'
+services:
+  allure:
+    image: "frankescobar/allure-docker-service"
+    environment:
+      CHECK_RESULTS_EVERY_SECONDS: NONE
+      KEEP_HISTORY: 1
+      KEEP_HISTORY_LATEST: 100
+      SECURITY_USER: ${ALLURE_SECURITY_USER}
+      SECURITY_PASS: ${ALLURE_SECURITY_PASS}
+      # SECURITY_USER and SECURITY_VIEWER_USER should be different
+      SECURITY_VIEWER_USER: ${ALLURE_SECURITY_VIEWER_USER}
+      SECURITY_VIEWER_PASS: ${ALLURE_SECURITY_VIEWER_PASS}
+      SECURITY_ENABLED: 1
+    ports:
+      - "5050:5050"
+    volumes:
+      - ${PWD}/allure-results:/app/allure-results
+      - ${PWD}/allure-reports:/app/default-reports
+
+  allure-ui:
+    image: "frankescobar/allure-docker-service-ui"
+    environment:
+      ALLURE_DOCKER_PUBLIC_API_URL: ${ALLURE_SERVER}
+      ALLURE_DOCKER_PUBLIC_API_URL_PREFIX: ""
+    ports:
+      - "5252:5252"
